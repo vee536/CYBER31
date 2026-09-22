@@ -28,7 +28,7 @@ The app can optionally sync progress to a [Supabase](https://supabase.com) proje
 
 1. Create a free Supabase project.
 2. Run [`supabase/schema.sql`](supabase/schema.sql) in the project's SQL editor.
-3. Copy `.env.example` to `.env.local` and fill in `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` from Project Settings → API.
+3. Copy `.env.example` to `.env.local` and fill in `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` from **Project Settings → API Keys → "Publishable and secret API keys"** tab — use the **Publishable key** (`sb_publishable_...`). Do not use the Secret key or the legacy `service_role`/`anon` JWT keys.
 4. Restart the dev server.
 
 Without those env vars set, the app runs exactly as before, on `localStorage` alone.
