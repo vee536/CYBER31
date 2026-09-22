@@ -2,13 +2,14 @@ import React, { useState, useEffect, useMemo } from 'react';
 import confetti from 'canvas-confetti';
 import { MISSIONS } from './data/missionsData';
 import { ACHIEVEMENTS } from './data/achievementsData';
-import { 
-  getCompletedMissions, 
-  saveMissionCompletion, 
-  getStreak, 
-  unlockAllMissions, 
+import {
+  getCompletedMissions,
+  saveMissionCompletion,
+  getStreak,
+  unlockAllMissions,
   resetProgress,
-  getSecurityLevel 
+  getSecurityLevel,
+  syncFromCloud,
 } from './utils/storage';
 import { cyberAudio } from './utils/audio';
 
@@ -30,10 +31,23 @@ export default function App() {
   const [isAchievementsOpen, setIsAchievementsOpen] = useState(false);
   const [isMuted, setIsMuted] = useState(cyberAudio.isMuted());
 
-  // Initialize storage
+  // Reviewer/demo controls are only exposed in local dev or via an explicit ?review=1 flag,
+  // so ordinary visitors on the deployed site can't instantly unlock or wipe their progress.
+  const showDemoToolbar =
+    import.meta.env.DEV ||
+    new URLSearchParams(window.location.search).get('review') === '1';
+
+  // Initialize storage, then reconcile with cloud progress (if Supabase is configured)
   useEffect(() => {
     setCompletedDays(getCompletedMissions());
     setStreak(getStreak());
+
+    syncFromCloud().then((merged) => {
+      if (merged) {
+        setCompletedDays(merged);
+        setStreak(getStreak());
+      }
+    });
   }, []);
 
   // Today's mission: find first uncompleted day or default to Day 5 (Phishing Sample)
@@ -229,13 +243,15 @@ export default function App() {
         completedDays={completedDays}
       />
 
-      {/* Reviewer / Demo Controls Toolbar */}
-      <DemoToolbar
-        onJumpToMission={handleOpenMission}
-        onUnlockAll={handleUnlockAll}
-        onResetProgress={handleResetProgress}
-        activeDay={todayDay}
-      />
+      {/* Reviewer / Demo Controls Toolbar (dev & ?review=1 only) */}
+      {showDemoToolbar && (
+        <DemoToolbar
+          onJumpToMission={handleOpenMission}
+          onUnlockAll={handleUnlockAll}
+          onResetProgress={handleResetProgress}
+          activeDay={todayDay}
+        />
+      )}
     </div>
   );
 }

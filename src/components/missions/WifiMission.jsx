@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Wifi, Shield, ShieldCheck, ShieldAlert, Lock, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Wifi, Shield, ArrowRight } from 'lucide-react';
 import { cyberAudio } from '../../utils/audio';
 
 export default function WifiMission({ onComplete }) {
@@ -92,8 +92,16 @@ export default function WifiMission({ onComplete }) {
             return (
               <div
                 key={net.id}
+                role="button"
+                tabIndex={0}
                 onClick={() => handleSelectNetwork(net)}
-                className={`p-3.5 rounded-xl border cursor-pointer transition-all ${
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleSelectNetwork(net);
+                  }
+                }}
+                className={`p-3.5 rounded-xl border cursor-pointer transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-cyan ${
                   isSelected
                     ? net.isRogue
                       ? 'bg-cyber-red-dim border-cyber-red'

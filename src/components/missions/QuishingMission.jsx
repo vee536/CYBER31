@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { QrCode, AlertTriangle, ShieldCheck, CheckCircle2, ArrowRight, Eye } from 'lucide-react';
+import { QrCode, CheckCircle2, ArrowRight } from 'lucide-react';
 import { cyberAudio } from '../../utils/audio';
 
 export default function QuishingMission({ onComplete }) {

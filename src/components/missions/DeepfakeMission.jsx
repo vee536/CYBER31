@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Video, ShieldAlert, CheckCircle2, ShieldCheck, XCircle, ArrowRight, Eye, Radio } from 'lucide-react';
+import { ShieldAlert, CheckCircle2, ShieldCheck, XCircle, ArrowRight, Radio } from 'lucide-react';
 import { cyberAudio } from '../../utils/audio';
 
 export default function DeepfakeMission({ onComplete }) {

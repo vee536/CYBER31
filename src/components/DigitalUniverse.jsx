@@ -14,6 +14,15 @@ export default function DigitalUniverse({
   const containerRef = useRef(null);
   const [hoveredNode, setHoveredNode] = useState(null);
   const [selectedCluster, setSelectedCluster] = useState('all');
+  // Kept in refs so hover changes (which re-render the component) don't force the
+  // render-loop effect to tear down and reset the camera's drag rotation mid-interaction.
+  const hoveredNodeRef = useRef(null);
+  const rotRef = useRef({ rotX: 0.3, rotY: 0.4 });
+  const packetsRef = useRef(null);
+
+  useEffect(() => {
+    hoveredNodeRef.current = hoveredNode;
+  }, [hoveredNode]);
 
   // Categorize 31 missions into spatial coordinates in a spherical / cluster layout
   const nodes = useMemo(() => {
@@ -63,22 +72,26 @@ export default function DigitalUniverse({
     };
     window.addEventListener('resize', handleResize);
 
-    // Rotation angles
+    // Rotation angles (seeded from the persisted ref so a re-run of this effect
+    // continues from where the camera was, instead of snapping back to the default)
     let angleX = 0.002;
     let angleY = 0.003;
-    let rotX = 0.3;
-    let rotY = 0.4;
+    let rotX = rotRef.current.rotX;
+    let rotY = rotRef.current.rotY;
     let isDragging = false;
     let lastMouseX = 0;
     let lastMouseY = 0;
 
-    // Moving data packets along connections
-    const packets = Array.from({ length: 18 }, () => ({
-      fromIdx: Math.floor(Math.random() * nodes.length),
-      toIdx: Math.floor(Math.random() * nodes.length),
-      progress: Math.random(),
-      speed: 0.005 + Math.random() * 0.008,
-    }));
+    // Moving data packets along connections (persisted across effect re-runs)
+    if (!packetsRef.current) {
+      packetsRef.current = Array.from({ length: 18 }, () => ({
+        fromIdx: Math.floor(Math.random() * nodes.length),
+        toIdx: Math.floor(Math.random() * nodes.length),
+        progress: Math.random(),
+        speed: 0.005 + Math.random() * 0.008,
+      }));
+    }
+    const packets = packetsRef.current;
 
     // Mouse / Touch handlers for rotation
     const onMouseDown = (e) => {
@@ -246,7 +259,7 @@ export default function DigitalUniverse({
       sortedNodes.forEach((node) => {
         const isCompleted = completedDays.includes(node.day);
         const isActiveThreat = node.day === activeDay;
-        const isHovered = hoveredNode && hoveredNode.day === node.day;
+        const isHovered = hoveredNodeRef.current && hoveredNodeRef.current.day === node.day;
 
         const baseRadius = (isHovered ? 12 : isActiveThreat ? 9 : 6.5) * node.projectedScale;
         const alpha = Math.max(0.2, (node.z + 280) / 560);
@@ -306,6 +319,7 @@ export default function DigitalUniverse({
     render();
 
     return () => {
+      rotRef.current = { rotX, rotY };
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
       canvasElem.removeEventListener('mousedown', onMouseDown);
@@ -315,7 +329,7 @@ export default function DigitalUniverse({
       window.removeEventListener('touchmove', onMouseMove);
       window.removeEventListener('touchend', onMouseUp);
     };
-  }, [nodes, filteredNodes, completedDays, activeDay, interactive, hoveredNode]);
+  }, [nodes, filteredNodes, completedDays, activeDay, interactive]);
 
   const handleNodeClick = () => {
     if (hoveredNode) {

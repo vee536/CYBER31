@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Smartphone, AlertTriangle, ShieldCheck, CheckCircle2, XCircle, ArrowRight, Info } from 'lucide-react';
+import { AlertTriangle, ShieldCheck, CheckCircle2, XCircle, ArrowRight } from 'lucide-react';
 import { cyberAudio } from '../../utils/audio';
 
 export default function SmishingMission({ onComplete }) {

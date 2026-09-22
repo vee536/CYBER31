@@ -50,8 +50,16 @@ export default function ScenarioMission({ mission, onComplete }) {
           return (
             <div
               key={option.id}
+              role="button"
+              tabIndex={0}
               onClick={() => handleSelectOption(option)}
-              className={`p-4 rounded-xl border cursor-pointer transition-all flex items-start justify-between gap-3 ${
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleSelectOption(option);
+                }
+              }}
+              className={`p-4 rounded-xl border cursor-pointer transition-all flex items-start justify-between gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-cyan ${
                 isSelected
                   ? option.isCorrect
                     ? 'bg-cyber-green-dim border-cyber-green text-white shadow-glow-green'

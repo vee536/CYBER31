@@ -24,22 +24,22 @@ export default function CyberHeader({
   return (
     <>
       <header className="sticky top-0 z-40 w-full bg-cyber-950/85 backdrop-blur-md border-b border-cyan-500/20 px-4 sm:px-6 py-3 transition-all">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
+
           {/* Logo & Brand Identity */}
-          <div 
+          <div
             onClick={() => handleNavClick('dashboard')}
-            className="flex items-center gap-3 cursor-pointer group"
+            className="flex items-center gap-2 sm:gap-3 cursor-pointer group min-w-0"
           >
-            <div className="relative w-10 h-10 rounded-xl bg-cyber-900 border border-cyber-cyan/50 flex items-center justify-center shadow-glow-cyan-sm group-hover:border-cyber-cyan transition-all">
+            <div className="relative w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-xl bg-cyber-900 border border-cyber-cyan/50 flex items-center justify-center shadow-glow-cyan-sm group-hover:border-cyber-cyan transition-all">
               <Shield className="w-5 h-5 text-cyber-cyan group-hover:scale-110 transition-transform" />
               <div className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-cyber-green animate-ping" />
             </div>
-            <div className="flex flex-col">
-              <span className="text-xl sm:text-2xl font-black font-cyber tracking-wider text-white group-hover:text-cyber-cyan transition-colors leading-none">
+            <div className="flex flex-col min-w-0">
+              <span className="text-lg sm:text-2xl font-black font-cyber tracking-wider text-white group-hover:text-cyber-cyan transition-colors leading-none truncate">
                 CYBER31
               </span>
-              <span className="text-[10px] sm:text-xs font-hud font-bold text-cyber-cyan tracking-widest uppercase">
+              <span className="hidden xs:block text-[10px] sm:text-xs font-hud font-bold text-cyber-cyan tracking-widest uppercase truncate">
                 MISSION: STAY SAFE ONLINE
               </span>
             </div>
@@ -83,22 +83,22 @@ export default function CyberHeader({
           </nav>
 
           {/* Actions: Security Gauge, Audio & Achievements */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+
             {/* Security Level Badge */}
-            <div className="flex items-center gap-2 bg-cyber-900/80 border border-cyan-500/30 px-3 py-1.5 rounded-xl shadow-inner">
-              <div className="relative w-4 h-4 flex items-center justify-center">
-                <div 
+            <div className="flex items-center gap-1.5 sm:gap-2 bg-cyber-900/80 border border-cyan-500/30 px-2 sm:px-3 py-1.5 rounded-xl shadow-inner">
+              <div className="relative w-4 h-4 flex items-center justify-center shrink-0">
+                <div
                   className={`w-2.5 h-2.5 rounded-full ${
-                    securityLevel >= 100 
-                      ? 'bg-cyber-green shadow-glow-green animate-pulse' 
+                    securityLevel >= 100
+                      ? 'bg-cyber-green shadow-glow-green animate-pulse'
                       : 'bg-cyber-cyan shadow-glow-cyan-sm'
-                  }`} 
+                  }`}
                 />
               </div>
               <div className="flex flex-col text-left">
-                <span className="text-[9px] font-mono text-slate-400 leading-none uppercase">Defense Level</span>
-                <span className="text-xs sm:text-sm font-bold font-mono text-white leading-tight">
+                <span className="hidden sm:block text-[9px] font-mono text-slate-400 leading-none uppercase">Defense Level</span>
+                <span className="text-xs sm:text-sm font-bold font-mono text-white leading-tight whitespace-nowrap">
                   {securityLevel}% <span className="text-cyber-cyan hidden sm:inline">SECURED</span>
                 </span>
               </div>
@@ -111,7 +111,7 @@ export default function CyberHeader({
                 onOpenAchievements();
               }}
               title="Milestone Achievements"
-              className="relative p-2 rounded-xl bg-cyber-900 border border-slate-700 hover:border-purple-400/60 text-slate-300 hover:text-purple-400 transition-all"
+              className="relative p-2 rounded-xl bg-cyber-900 border border-slate-700 hover:border-purple-400/60 text-slate-300 hover:text-purple-400 transition-all shrink-0"
             >
               <Award className="w-4 h-4" />
               {achievementsCount > 0 && (
@@ -127,7 +127,7 @@ export default function CyberHeader({
                 onToggleAudio();
               }}
               title={isMuted ? 'Unmute Cyber Audio' : 'Mute Cyber Audio'}
-              className={`p-2 rounded-xl border transition-all ${
+              className={`p-2 rounded-xl border transition-all shrink-0 ${
                 isMuted
                   ? 'bg-cyber-900 border-slate-700 text-slate-500 hover:text-slate-300'
                   : 'bg-cyber-cyan/15 border-cyber-cyan text-cyber-cyan shadow-glow-cyan-sm'
@@ -139,7 +139,7 @@ export default function CyberHeader({
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-xl bg-cyber-900 border border-slate-700 text-slate-300 hover:text-cyber-cyan"
+              className="md:hidden p-2 rounded-xl bg-cyber-900 border border-slate-700 text-slate-300 hover:text-cyber-cyan shrink-0"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>

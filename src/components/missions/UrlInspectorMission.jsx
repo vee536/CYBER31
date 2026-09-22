@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Globe, Lock, AlertTriangle, CheckCircle2, ShieldAlert, ArrowRight, Eye } from 'lucide-react';
+import { Globe, Lock, CheckCircle2, ArrowRight, Eye } from 'lucide-react';
 import { cyberAudio } from '../../utils/audio';
 
 export default function UrlInspectorMission({ onComplete }) {

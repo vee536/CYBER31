@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AlertTriangle, CheckCircle2, Shield, Eye, HelpCircle, ArrowRight } from 'lucide-react';
+import { AlertTriangle, CheckCircle2, Eye, ArrowRight } from 'lucide-react';
 import { cyberAudio } from '../../utils/audio';
 
 export default function PhishingMission({ onComplete }) {

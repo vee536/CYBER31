@@ -15,8 +15,16 @@ export default function MissionCard({
 
   return (
     <div
+      role="button"
+      tabIndex={0}
       onClick={handleClick}
-      className={`group relative p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer select-none flex flex-col justify-between text-left ${
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleClick();
+        }
+      }}
+      className={`group relative p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer select-none flex flex-col justify-between text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-cyber-cyan ${
         isCompleted
           ? 'bg-cyber-900/60 border-cyber-green/40 hover:border-cyber-green hover:shadow-glow-green/30'
           : isActiveThreat

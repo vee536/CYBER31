@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Share2, MapPin, Calendar, CheckCircle2, ShieldAlert, ArrowRight, Eye } from 'lucide-react';
+import { MapPin, CheckCircle2, ArrowRight } from 'lucide-react';
 import { cyberAudio } from '../../utils/audio';
 
 export default function OversharingMission({ onComplete }) {
