@@ -111,8 +111,18 @@ export const syncFromCloud = async (userId = null) => {
 export const migrateAnonymousProgressToUser = async (userId) => {
   if (!isCloudSyncEnabled() || !userId) return getCompletedMissions();
 
-  const merged = await syncFromCloud(userId);
-  return merged || getCompletedMissions();
+  // Merge in any progress the account already has from elsewhere...
+  await syncFromCloud(userId);
+
+  // ...then push the result up under this account explicitly. syncFromCloud
+  // only writes back when it found an existing row to merge with, so a
+  // brand-new account (no cloud row yet) would otherwise keep its progress
+  // local-only until the next mission completion — leaving it invisible if
+  // the user logs in on a second device before then.
+  const finalDays = getCompletedMissions();
+  const finalStreak = getStreak();
+  syncToCloud(finalDays, finalStreak, userId);
+  return finalDays;
 };
 
 export const getCompletedMissions = () => {
