@@ -113,12 +113,12 @@ export default function MissionModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto select-none">
       
       {/* Modal Container */}
-      <div className="relative w-full max-w-2xl bg-cyber-950 border border-cyan-500/30 rounded-3xl overflow-hidden shadow-2xl my-auto hud-corner">
+      <div className="relative w-full max-w-2xl bg-cyber-950 border border-cyber-cyan/30 rounded-3xl overflow-hidden shadow-2xl my-auto hud-corner">
         
         {/* Top Header HUD Bar */}
         <div className="bg-cyber-900/90 border-b border-slate-800 px-4 sm:px-6 py-3 flex items-center justify-between text-xs font-mono">
           <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-cyber-red animate-ping" />
+            <span className="w-2.5 h-2.5 rounded-full bg-cyber-red animate-pulse-slow" />
             <span className="text-white font-bold font-cyber">
               DAY {String(mission.day).padStart(2, '0')} // {mission.alertSource}
             </span>
@@ -145,7 +145,7 @@ export default function MissionModal({
              =================================================================== */}
           {currentStep === 1 && (
             <div className="flex flex-col items-center animate-fade-in">
-              <div className="w-20 h-20 rounded-2xl bg-red-950/80 border-2 border-cyber-red flex items-center justify-center mb-6 shadow-glow-red threat-glitch animate-pulse">
+              <div className="w-20 h-20 rounded-2xl bg-red-950/80 border-2 border-cyber-red flex items-center justify-center mb-6 shadow-glow-red animate-pulse">
                 <AlertTriangle className="w-10 h-10 text-cyber-red" />
               </div>
 
@@ -214,7 +214,7 @@ export default function MissionModal({
               <div className="w-full flex justify-end">
                 <button
                   onClick={() => handleStepTransition(3)}
-                  className="w-full sm:w-auto py-3.5 px-8 rounded-xl font-cyber font-bold text-xs uppercase tracking-wider bg-gradient-to-r from-cyber-cyan to-blue-500 text-black shadow-glow-cyan hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto py-3.5 px-8 rounded-xl font-cyber font-bold text-xs uppercase tracking-wider bg-gradient-to-r from-cyber-cyan to-cyber-green text-black shadow-glow-cyan hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
                 >
                   <span>COMMENCE TASK INTERACTION</span>
                   <ArrowRight className="w-4 h-4 text-black" />
@@ -247,7 +247,7 @@ export default function MissionModal({
               <h3 className="text-xl sm:text-2xl font-bold font-cyber text-white mb-2 tracking-wider">
                 THREAT NEUTRALIZATION IN PROGRESS
               </h3>
-              <p className="text-xs font-mono text-cyan-300 mb-6">
+              <p className="text-xs font-mono text-cyber-cyan mb-6">
                 PURGING MALICIOUS ARTIFACTS // SECURING NODE
               </p>
 
@@ -323,7 +323,7 @@ export default function MissionModal({
 
               <button
                 onClick={handleFinalComplete}
-                className="w-full sm:w-auto py-4 px-10 rounded-xl font-cyber font-bold text-xs sm:text-sm uppercase tracking-wider bg-gradient-to-r from-cyber-cyan via-blue-500 to-cyber-green text-black shadow-glow-cyan hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
+                className="w-full sm:w-auto py-4 px-10 rounded-xl font-cyber font-bold text-xs sm:text-sm uppercase tracking-wider bg-gradient-to-r from-cyber-cyan via-cyber-green to-cyber-green text-black shadow-glow-cyan hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
               >
                 <span>RETURN TO COMMAND CENTER</span>
                 <ArrowRight className="w-4 h-4 text-black" />

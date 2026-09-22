@@ -98,7 +98,7 @@ export default function SmishingMission({ onComplete }) {
                 className={`w-full p-2 rounded-lg text-left text-xs font-mono transition-all ${
                   revealedClues.has('url')
                     ? 'bg-cyber-green-dim text-cyber-green border border-cyber-green'
-                    : 'bg-cyan-950/60 text-cyan-300 border border-cyan-400/80 hover:bg-cyan-900/40'
+                    : 'bg-cyber-950/60 text-cyber-cyan border border-cyber-cyan/80 hover:bg-cyber-900/40'
                 }`}
               >
                 👉 Update address & pay fee: http://usps-parcel-verify.cc/track

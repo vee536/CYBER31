@@ -192,7 +192,7 @@ export default function DigitalUniverse({
       ctx.save();
       ctx.beginPath();
       ctx.arc(cx, cy, 180 * scale, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(0, 240, 255, 0.05)';
+      ctx.strokeStyle = 'rgba(198, 255, 77, 0.05)';
       ctx.lineWidth = 1;
       ctx.setLineDash([4, 8]);
       ctx.stroke();
@@ -220,11 +220,11 @@ export default function DigitalUniverse({
             ctx.lineTo(n2.x, n2.y);
 
             if (isN1Secured && isN2Secured) {
-              ctx.strokeStyle = 'rgba(0, 255, 170, 0.25)';
+              ctx.strokeStyle = 'rgba(62, 207, 142, 0.25)';
             } else if (n1.day === activeDay || n2.day === activeDay) {
               ctx.strokeStyle = 'rgba(255, 51, 102, 0.28)';
             } else {
-              ctx.strokeStyle = 'rgba(0, 240, 255, 0.12)';
+              ctx.strokeStyle = 'rgba(198, 255, 77, 0.12)';
             }
             ctx.stroke();
           }
@@ -246,8 +246,8 @@ export default function DigitalUniverse({
           const py = nFrom.y + (nTo.y - nFrom.y) * p.progress;
           ctx.beginPath();
           ctx.arc(px, py, 2.2 * scale, 0, Math.PI * 2);
-          ctx.fillStyle = '#00f0ff';
-          ctx.shadowColor = '#00f0ff';
+          ctx.fillStyle = '#c6ff4d';
+          ctx.shadowColor = '#c6ff4d';
           ctx.shadowBlur = 8;
           ctx.fill();
           ctx.shadowBlur = 0;
@@ -289,9 +289,9 @@ export default function DigitalUniverse({
           ctx.fillStyle = '#3a4256';
           ctx.shadowBlur = 0;
         } else if (isCompleted) {
-          // Secured Node: Electric Cyan/Green
-          ctx.fillStyle = '#00ffaa';
-          ctx.shadowColor = '#00ffaa';
+          // Secured Node: mint green
+          ctx.fillStyle = '#3ecf8e';
+          ctx.shadowColor = '#3ecf8e';
           ctx.shadowBlur = 12;
         } else if (isActiveThreat) {
           // Active Threat Signal: Pulsing Neon Red
@@ -299,9 +299,9 @@ export default function DigitalUniverse({
           ctx.shadowColor = '#ff3366';
           ctx.shadowBlur = 16;
         } else {
-          // Locked / Pending Node: Electric Cyan / Dim slate
-          ctx.fillStyle = '#00b4d8';
-          ctx.shadowColor = '#00b4d8';
+          // Open / Pending Node: dimmed lime
+          ctx.fillStyle = '#8fbf4d';
+          ctx.shadowColor = '#8fbf4d';
           ctx.shadowBlur = 6;
         }
 
@@ -348,7 +348,7 @@ export default function DigitalUniverse({
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[380px] sm:h-[480px] md:h-[540px] rounded-2xl bg-cyber-950/80 border border-cyan-500/25 overflow-hidden flex items-center justify-center hud-corner"
+      className="relative w-full h-[380px] sm:h-[480px] md:h-[540px] rounded-2xl bg-cyber-950/80 border border-cyber-cyan/25 overflow-hidden flex items-center justify-center hud-corner"
     >
       {/* Background cyber grid & scanlines */}
       <div className="absolute inset-0 cyber-grid opacity-30 pointer-events-none" />
@@ -356,8 +356,8 @@ export default function DigitalUniverse({
 
       {/* Top HUD Telemetry Bar */}
       <div className="absolute top-3 left-3 right-3 z-10 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
-        <div className="flex items-center gap-2 bg-cyber-900/90 border border-slate-700/80 backdrop-blur-md px-3 py-1.5 rounded-lg text-xs font-mono text-cyan-300">
-          <span className="w-2 h-2 rounded-full bg-cyber-cyan animate-ping" />
+        <div className="flex items-center gap-2 bg-cyber-900/90 border border-slate-700/80 backdrop-blur-md px-3 py-1.5 rounded-lg text-xs font-mono text-cyber-cyan">
+          <span className="w-2 h-2 rounded-full bg-cyber-cyan animate-pulse-slow" />
           <span className="font-hud uppercase tracking-wider font-semibold">
             DIGITAL UNIVERSE // 31 NODES ACTIVE
           </span>
@@ -435,7 +435,7 @@ export default function DigitalUniverse({
               {isDateLocked ? `This mission unlocks ${getUnlockDateLabel(hoveredNode.day)}.` : hoveredNode.topic}
             </p>
 
-            <div className="flex items-center justify-between pt-1 border-t border-slate-800 text-[11px] font-mono text-cyan-400">
+            <div className="flex items-center justify-between pt-1 border-t border-slate-800 text-[11px] font-mono text-cyber-cyan">
               <span>{isDateLocked ? 'RETURN ON UNLOCK DATE' : 'TAP TO LAUNCH MISSION'}</span>
               <Eye className="w-3.5 h-3.5" />
             </div>

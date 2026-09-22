@@ -29,7 +29,7 @@ export default function DownloadMission({ onComplete }) {
             <h4 className="text-sm font-bold text-white">AudioStudio Open Source v3.4</h4>
             <span className="text-[11px] font-mono text-slate-400">License: GPLv3 • Size: 48.2 MB</span>
           </div>
-          <span className="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-cyan-400">
+          <span className="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-cyber-cyan">
             OFFICIAL BUILD
           </span>
         </div>

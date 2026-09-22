@@ -61,7 +61,7 @@ export default function OversharingMission({ onComplete }) {
         {/* User profile row */}
         <div className="p-4 border-b border-slate-800/80 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500 to-cyan-500 flex items-center justify-center font-bold text-white text-sm">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500 to-cyber-cyan flex items-center justify-center font-bold text-white text-sm">
               AL
             </div>
             <div>

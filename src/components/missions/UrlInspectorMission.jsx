@@ -140,7 +140,7 @@ export default function UrlInspectorMission({ onComplete }) {
             key={p.id}
             className={`p-3 rounded-xl border text-left transition-all ${
               analyzedParts.has(p.id)
-                ? 'bg-cyber-900/80 border-cyan-500/40'
+                ? 'bg-cyber-900/80 border-cyber-cyan/40'
                 : 'bg-cyber-950/40 border-slate-800/60 opacity-60'
             }`}
           >

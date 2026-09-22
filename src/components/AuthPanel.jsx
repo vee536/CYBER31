@@ -90,7 +90,7 @@ export default function AuthPanel({ isOpen, onClose, user, onAuthed }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md select-none animate-fade-in">
-      <div className="relative w-full max-w-md bg-cyber-950 border border-cyan-500/40 rounded-3xl overflow-hidden shadow-2xl hud-corner">
+      <div className="relative w-full max-w-md bg-cyber-950 border border-cyber-cyan/40 rounded-3xl overflow-hidden shadow-2xl hud-corner">
         {/* Header */}
         <div className="bg-cyber-900/90 border-b border-slate-800 px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
@@ -236,7 +236,7 @@ export default function AuthPanel({ isOpen, onClose, user, onAuthed }) {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3.5 rounded-xl font-cyber font-bold text-xs uppercase tracking-wider bg-gradient-to-r from-cyber-cyan to-blue-500 text-black shadow-glow-cyan hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full py-3.5 rounded-xl font-cyber font-bold text-xs uppercase tracking-wider bg-gradient-to-r from-cyber-cyan to-cyber-green text-black shadow-glow-cyan hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {mode === 'signup' ? <UserPlus className="w-4 h-4" /> : <LogIn className="w-4 h-4" />}
                   <span>{isSubmitting ? 'Please wait…' : mode === 'signup' ? 'Create Account' : 'Log In'}</span>

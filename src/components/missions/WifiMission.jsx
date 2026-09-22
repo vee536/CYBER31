@@ -116,7 +116,7 @@ export default function WifiMission({ onComplete }) {
                   </span>
                   <span
                     className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded ${
-                      net.isRogue ? 'bg-red-900/60 text-red-300' : 'bg-cyan-900/60 text-cyan-300'
+                      net.isRogue ? 'bg-red-900/60 text-red-300' : 'bg-cyber-900/60 text-cyber-cyan'
                     }`}
                   >
                     {net.security}

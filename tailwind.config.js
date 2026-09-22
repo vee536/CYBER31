@@ -15,21 +15,23 @@ export default {
     },
     extend: {
       colors: {
+        // TryHackMe-inspired palette: deep navy base with the signature
+        // lime-green accent, plus a mint-teal for success/secured states.
         cyber: {
-          950: '#04060d',
-          900: '#070b16',
-          850: '#0b1122',
-          800: '#101a33',
-          700: '#1b294d',
-          600: '#2a3b68',
-          cyan: '#00f0ff',
-          'cyan-dim': 'rgba(0, 240, 255, 0.15)',
+          950: '#0a0e1f',
+          900: '#0e1424',
+          850: '#121a30',
+          800: '#17203d',
+          700: '#212c52',
+          600: '#2f3d6e',
+          cyan: '#c6ff4d',
+          'cyan-dim': 'rgba(198, 255, 77, 0.15)',
           purple: '#a855f7',
           'purple-dim': 'rgba(168, 85, 247, 0.15)',
           red: '#ff3366',
           'red-dim': 'rgba(255, 51, 102, 0.15)',
-          green: '#00ffaa',
-          'green-dim': 'rgba(0, 255, 170, 0.15)',
+          green: '#3ecf8e',
+          'green-dim': 'rgba(62, 207, 142, 0.15)',
           amber: '#ffb020',
           'amber-dim': 'rgba(255, 176, 32, 0.15)',
         }
@@ -41,12 +43,12 @@ export default {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        'glow-cyan': '0 0 20px rgba(0, 240, 255, 0.45)',
-        'glow-cyan-sm': '0 0 10px rgba(0, 240, 255, 0.3)',
+        'glow-cyan': '0 0 20px rgba(198, 255, 77, 0.4)',
+        'glow-cyan-sm': '0 0 10px rgba(198, 255, 77, 0.28)',
         'glow-purple': '0 0 20px rgba(168, 85, 247, 0.45)',
         'glow-red': '0 0 20px rgba(255, 51, 102, 0.5)',
-        'glow-green': '0 0 20px rgba(0, 255, 170, 0.45)',
-        'cyber-card': '0 8px 32px 0 rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(0, 240, 255, 0.15)',
+        'glow-green': '0 0 20px rgba(62, 207, 142, 0.45)',
+        'cyber-card': '0 8px 32px 0 rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(198, 255, 77, 0.12)',
       },
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',

@@ -26,7 +26,7 @@ export default function CyberHeader({
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full bg-cyber-950/85 backdrop-blur-md border-b border-cyan-500/20 px-4 sm:px-6 py-3 transition-all">
+      <header className="sticky top-0 z-40 w-full bg-cyber-950/85 backdrop-blur-md border-b border-cyber-cyan/20 px-4 sm:px-6 py-3 transition-all">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
 
           {/* Logo & Brand Identity */}
@@ -36,7 +36,7 @@ export default function CyberHeader({
           >
             <div className="relative w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-xl bg-cyber-900 border border-cyber-cyan/50 flex items-center justify-center shadow-glow-cyan-sm group-hover:border-cyber-cyan transition-all">
               <Shield className="w-5 h-5 text-cyber-cyan group-hover:scale-110 transition-transform" />
-              <div className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-cyber-green animate-ping" />
+              <div className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-cyber-green animate-pulse-slow" />
             </div>
             <div className="flex flex-col min-w-0">
               <span className="text-lg sm:text-2xl font-black font-cyber tracking-wider text-white group-hover:text-cyber-cyan transition-colors leading-none truncate">
@@ -89,7 +89,7 @@ export default function CyberHeader({
           <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
 
             {/* Security Level Badge */}
-            <div className="flex items-center gap-1.5 sm:gap-2 bg-cyber-900/80 border border-cyan-500/30 px-2 sm:px-3 py-1.5 rounded-xl shadow-inner">
+            <div className="flex items-center gap-1.5 sm:gap-2 bg-cyber-900/80 border border-cyber-cyan/30 px-2 sm:px-3 py-1.5 rounded-xl shadow-inner">
               <div className="relative w-4 h-4 flex items-center justify-center shrink-0">
                 <div
                   className={`w-2.5 h-2.5 rounded-full ${
@@ -212,7 +212,7 @@ export default function CyberHeader({
       </header>
 
       {/* Floating Mobile Bottom Action Bar (Mobile-first ergonomics) */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-cyber-950/95 backdrop-blur-lg border-t border-cyan-500/25 p-3 flex items-center justify-between gap-3 shadow-2xl">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-cyber-950/95 backdrop-blur-lg border-t border-cyber-cyan/25 p-3 flex items-center justify-between gap-3 shadow-2xl">
         <button
           onClick={() => handleNavClick('dashboard')}
           className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-hud font-bold tracking-wider uppercase flex items-center justify-center gap-2 transition-all ${
@@ -234,7 +234,7 @@ export default function CyberHeader({
           title={campaignStarted ? undefined : 'Campaign starts October 1'}
           className={`flex-[1.4] py-2.5 px-3 rounded-xl text-xs font-cyber font-bold tracking-wider uppercase flex items-center justify-center gap-2 transition-all active:scale-95 ${
             campaignStarted
-              ? 'bg-gradient-to-r from-cyber-cyan to-blue-500 text-black shadow-glow-cyan'
+              ? 'bg-gradient-to-r from-cyber-cyan to-cyber-green text-black shadow-glow-cyan'
               : 'bg-cyber-900 text-slate-500 border border-slate-800 cursor-not-allowed'
           }`}
         >

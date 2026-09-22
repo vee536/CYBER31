@@ -63,7 +63,7 @@ export default function PhishingMission({ onComplete }) {
         </div>
 
         {/* Counter Badge */}
-        <div className="shrink-0 px-3 py-1 rounded-lg bg-cyber-950 border border-cyan-500/40 text-xs font-mono font-bold text-cyber-cyan shadow-glow-cyan-sm">
+        <div className="shrink-0 px-3 py-1 rounded-lg bg-cyber-950 border border-cyber-cyan/40 text-xs font-mono font-bold text-cyber-cyan shadow-glow-cyan-sm">
           {foundHotspots.size} / {hotspots.length} SPOTTED
         </div>
       </div>
@@ -152,7 +152,7 @@ export default function PhishingMission({ onComplete }) {
               className={`px-4 py-2.5 rounded-lg text-xs font-mono font-bold transition-all inline-flex items-center gap-2 ${
                 foundHotspots.has('link')
                   ? 'bg-cyber-green-dim text-cyber-green border border-cyber-green/50'
-                  : 'bg-cyan-950/80 text-cyan-300 border border-cyan-400 hover:bg-cyan-900/60 cursor-pointer shadow-glow-cyan-sm'
+                  : 'bg-cyber-950/80 text-cyber-cyan border border-cyber-cyan hover:bg-cyber-900/60 cursor-pointer shadow-glow-cyan-sm'
               }`}
             >
               <span>🔗 Verify Account Security Portal: https://paypal.com/verify</span>

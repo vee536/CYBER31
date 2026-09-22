@@ -59,10 +59,10 @@ export default function LoadingScreen({ onComplete }) {
         </p>
 
         {/* Progress Bar Container */}
-        <div className="w-full bg-cyber-900/90 border border-cyan-500/30 rounded-lg p-1.5 mb-4 shadow-cyber-card hud-corner">
+        <div className="w-full bg-cyber-900/90 border border-cyber-cyan/30 rounded-lg p-1.5 mb-4 shadow-cyber-card hud-corner">
           <div className="relative h-3 w-full bg-cyber-950 rounded overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-cyan-500 via-cyber-cyan to-purple-500 transition-all duration-300 ease-out relative"
+              className="h-full bg-gradient-to-r from-cyber-cyan via-cyber-cyan to-purple-500 transition-all duration-300 ease-out relative"
               style={{ width: `${progress}%` }}
             >
               <div className="absolute right-0 top-0 bottom-0 w-2 bg-white shadow-glow-cyan" />
@@ -82,7 +82,7 @@ export default function LoadingScreen({ onComplete }) {
         {/* Skip button for fast mobile users */}
         <button
           onClick={onComplete}
-          className="text-xs font-mono text-slate-500 hover:text-cyber-cyan transition-colors px-4 py-2 border border-slate-800 hover:border-cyan-500/40 rounded uppercase tracking-wider"
+          className="text-xs font-mono text-slate-500 hover:text-cyber-cyan transition-colors px-4 py-2 border border-slate-800 hover:border-cyber-cyan/40 rounded uppercase tracking-wider"
         >
           [ Skip Boot Sequence ]
         </button>

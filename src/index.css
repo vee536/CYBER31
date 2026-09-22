@@ -5,12 +5,12 @@
 @layer base {
   body {
     font-family: 'Inter', system-ui, sans-serif;
-    background-color: #04060d;
+    background-color: #0a0e1f;
     color: #e2e8f0;
     touch-action: manipulation;
   }
 
-  h1, h2, h3, .font-cyber {
+  .font-cyber {
     font-family: 'Orbitron', 'Rajdhani', sans-serif;
     letter-spacing: 0.05em;
   }
@@ -27,25 +27,25 @@
 
 /* Cyber Grid background */
 .cyber-grid {
-  background-image: 
-    linear-gradient(to right, rgba(0, 240, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+  background-image:
+    linear-gradient(to right, rgba(198, 255, 77, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(198, 255, 77, 0.04) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
 .cyber-grid-dense {
-  background-image: 
-    linear-gradient(to right, rgba(0, 240, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 240, 255, 0.06) 1px, transparent 1px);
+  background-image:
+    linear-gradient(to right, rgba(198, 255, 77, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(198, 255, 77, 0.06) 1px, transparent 1px);
   background-size: 16px 16px;
 }
 
 /* Glassmorphic Panel */
 .cyber-panel {
-  background: rgba(11, 17, 34, 0.75);
+  background: rgba(15, 21, 41, 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 240, 255, 0.2);
+  border: 1px solid rgba(198, 255, 77, 0.18);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
 }
 
@@ -89,20 +89,20 @@
   position: absolute;
   width: 8px;
   height: 8px;
-  border-color: rgba(0, 240, 255, 0.6);
+  border-color: rgba(198, 255, 77, 0.6);
   pointer-events: none;
 }
 .hud-corner::before {
   top: -1px;
   left: -1px;
-  border-top: 2px solid rgba(0, 240, 255, 0.7);
-  border-left: 2px solid rgba(0, 240, 255, 0.7);
+  border-top: 2px solid rgba(198, 255, 77, 0.7);
+  border-left: 2px solid rgba(198, 255, 77, 0.7);
 }
 .hud-corner::after {
   bottom: -1px;
   right: -1px;
-  border-bottom: 2px solid rgba(0, 240, 255, 0.7);
-  border-right: 2px solid rgba(0, 240, 255, 0.7);
+  border-bottom: 2px solid rgba(198, 255, 77, 0.7);
+  border-right: 2px solid rgba(198, 255, 77, 0.7);
 }
 
 /* Threat Corner Reticles */
@@ -125,14 +125,14 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #070b16;
+  background: #0e1424;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1b294d;
+  background: #212c52;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #00f0ff;
+  background: #c6ff4d;
 }
 
 /* Threat Glitch Effect - applied ONLY to alerts / threat beacons */

@@ -31,10 +31,10 @@ export default function StoryIntro({ onEnterMissionControl, onStartTodayMission,
          ========================================================================= */}
       <section className="relative w-full min-h-[85vh] sm:min-h-[90vh] flex flex-col items-center justify-center text-center px-4 sm:px-6 py-12 overflow-hidden">
         {/* Glowing background ambient lights */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 sm:w-[550px] sm:h-[550px] bg-gradient-to-tr from-cyan-500/15 via-purple-600/15 to-transparent rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 sm:w-[550px] sm:h-[550px] bg-gradient-to-tr from-cyber-cyan/15 via-purple-600/15 to-transparent rounded-full blur-3xl pointer-events-none" />
         
         {/* HUD Top Tag */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyber-900/90 border border-cyan-500/30 text-xs font-mono text-cyber-cyan mb-6 shadow-glow-cyan-sm animate-pulse-slow">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyber-900/90 border border-cyber-cyan/30 text-xs font-mono text-cyber-cyan mb-6 shadow-glow-cyan-sm animate-pulse-slow">
           <Radio className="w-3.5 h-3.5 text-cyber-cyan animate-pulse" />
           <span className="font-hud tracking-widest uppercase">OCTOBER AWARENESS CAMPAIGN // PROTOCOL ONLINE</span>
         </div>
@@ -63,7 +63,7 @@ export default function StoryIntro({ onEnterMissionControl, onStartTodayMission,
               cyberAudio.playClick();
               onStartTodayMission(todayDay);
             }}
-            className="w-full sm:flex-1 py-4 px-6 rounded-xl font-cyber font-bold text-sm uppercase tracking-wider bg-gradient-to-r from-cyber-cyan via-blue-500 to-cyber-purple text-black shadow-glow-cyan hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2 group"
+            className="w-full sm:flex-1 py-4 px-6 rounded-xl font-cyber font-bold text-sm uppercase tracking-wider bg-gradient-to-r from-cyber-cyan via-cyber-green to-cyber-purple text-black shadow-glow-cyan hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2 group"
           >
             <Zap className="w-5 h-5 text-black group-hover:scale-125 transition-transform" />
             <span>START TODAY'S MISSION</span>
@@ -71,7 +71,7 @@ export default function StoryIntro({ onEnterMissionControl, onStartTodayMission,
 
           <button
             onClick={handleCtaClick}
-            className="w-full sm:flex-1 py-4 px-6 rounded-xl font-hud font-bold text-sm uppercase tracking-wider bg-cyber-900/90 border border-cyan-500/30 text-cyber-cyan hover:bg-cyber-800 hover:border-cyber-cyan transition-all flex items-center justify-center gap-2"
+            className="w-full sm:flex-1 py-4 px-6 rounded-xl font-hud font-bold text-sm uppercase tracking-wider bg-cyber-900/90 border border-cyber-cyan/30 text-cyber-cyan hover:bg-cyber-800 hover:border-cyber-cyan transition-all flex items-center justify-center gap-2"
           >
             <span>MISSION CONTROL</span>
             <ArrowRight className="w-4 h-4" />
@@ -81,7 +81,7 @@ export default function StoryIntro({ onEnterMissionControl, onStartTodayMission,
         {/* Subtle scroll cue */}
         <div className="mt-12 flex flex-col items-center gap-1.5 text-[11px] font-mono text-slate-500 animate-bounce">
           <span>DISCOVER THE STORY</span>
-          <div className="w-0.5 h-6 bg-gradient-to-b from-cyan-500 to-transparent" />
+          <div className="w-0.5 h-6 bg-gradient-to-b from-cyber-cyan to-transparent" />
         </div>
       </section>
 
@@ -112,7 +112,7 @@ export default function StoryIntro({ onEnterMissionControl, onStartTodayMission,
           ].map((item, idx) => (
             <div
               key={idx}
-              className="cyber-panel p-4 sm:p-5 rounded-2xl flex flex-col items-center text-center group hover:border-cyan-500/50 transition-all hud-corner"
+              className="cyber-panel p-4 sm:p-5 rounded-2xl flex flex-col items-center text-center group hover:border-cyber-cyan/50 transition-all hud-corner"
             >
               <div className="w-12 h-12 rounded-xl bg-cyber-900 border border-slate-800 flex items-center justify-center text-cyber-cyan mb-3 group-hover:scale-110 group-hover:border-cyber-cyan shadow-glow-cyan-sm transition-all">
                 <item.icon className="w-6 h-6" />
@@ -191,7 +191,7 @@ export default function StoryIntro({ onEnterMissionControl, onStartTodayMission,
                   <span className="text-[10px] font-mono font-bold text-cyber-red tracking-wider">
                     {threat.tag}
                   </span>
-                  <span className="w-2 h-2 rounded-full bg-cyber-red animate-ping" />
+                  <span className="w-2 h-2 rounded-full bg-cyber-red animate-pulse-slow" />
                 </div>
                 <h4 className="text-base font-cyber font-bold text-white mb-1">
                   ⚠️ {threat.title}
@@ -212,8 +212,8 @@ export default function StoryIntro({ onEnterMissionControl, onStartTodayMission,
           SECTION 3 & 4 — THE MISSION & YOUR ROLE AS DIGITAL DEFENDER
          ========================================================================= */}
       <section className="w-full max-w-4xl px-4 sm:px-6 py-16 sm:py-24 border-t border-slate-900 text-center">
-        <div className="cyber-panel p-8 sm:p-12 rounded-3xl border border-cyan-500/30 relative overflow-hidden hud-corner shadow-2xl">
-          <div className="absolute -top-24 -right-24 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="cyber-panel p-8 sm:p-12 rounded-3xl border border-cyber-cyan/30 relative overflow-hidden hud-corner shadow-2xl">
+          <div className="absolute -top-24 -right-24 w-64 h-64 bg-cyber-cyan/10 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 flex flex-col items-center">

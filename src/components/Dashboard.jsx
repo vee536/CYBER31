@@ -124,7 +124,7 @@ export default function Dashboard({
                   <span className="text-2xl font-black font-mono text-white leading-none">
                     {securityPercentage}%
                   </span>
-                  <span className="text-[9px] font-mono text-cyan-400 uppercase mt-0.5">
+                  <span className="text-[9px] font-mono text-cyber-cyan uppercase mt-0.5">
                     SECURED
                   </span>
                 </div>
@@ -154,7 +154,7 @@ export default function Dashboard({
           <div className="bg-cyber-900/90 border border-slate-800 p-3.5 rounded-2xl flex items-center justify-between">
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400">
-                <Flame className="w-5 h-5 animate-bounce" />
+                <Flame className="w-5 h-5" />
               </div>
               <div>
                 <div className="text-xs font-hud font-bold text-white uppercase tracking-wider">
@@ -233,7 +233,7 @@ export default function Dashboard({
           </div>
         ) : (
           <div className="lg:col-span-7 cyber-panel p-6 sm:p-7 rounded-3xl flex flex-col items-center justify-center text-center hud-corner shadow-2xl relative overflow-hidden gap-3">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-cyber-600/10 rounded-full blur-3xl pointer-events-none" />
             <div className="w-14 h-14 rounded-2xl bg-cyber-900 border border-cyber-cyan/40 flex items-center justify-center text-cyber-cyan">
               <Radio className="w-7 h-7" />
             </div>

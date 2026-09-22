@@ -12,7 +12,7 @@ export default function DemoToolbar({
 
   return (
     <div className="fixed bottom-16 sm:bottom-4 right-4 z-40 select-none">
-      <div className="bg-cyber-950/95 border border-cyan-500/40 rounded-2xl shadow-2xl backdrop-blur-md overflow-hidden transition-all">
+      <div className="bg-cyber-950/95 border border-cyber-cyan/40 rounded-2xl shadow-2xl backdrop-blur-md overflow-hidden transition-all">
         
         {/* Toggle Bar */}
         <button

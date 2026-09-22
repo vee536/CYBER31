@@ -63,7 +63,7 @@ export default function PasswordMission({ onComplete }) {
       return { label: 'MODERATE', color: 'bg-amber-500', width: '60%', text: 'text-amber-400' };
     }
     if (passedCount < checks.length) {
-      return { label: 'STRONG', color: 'bg-cyan-500', width: '85%', text: 'text-cyan-400' };
+      return { label: 'STRONG', color: 'bg-cyber-cyan', width: '85%', text: 'text-cyber-cyan' };
     }
     return { label: 'FORTRESS GRADE', color: 'bg-cyber-green', width: '100%', text: 'text-cyber-green' };
   };
@@ -73,7 +73,7 @@ export default function PasswordMission({ onComplete }) {
   return (
     <div className="w-full flex flex-col items-center">
       {/* Privacy Notice Banner */}
-      <div className="w-full bg-cyan-950/40 border border-cyan-500/30 p-3 rounded-xl mb-4 flex items-center gap-2.5 text-xs font-mono text-cyan-300">
+      <div className="w-full bg-cyber-950/40 border border-cyber-cyan/30 p-3 rounded-xl mb-4 flex items-center gap-2.5 text-xs font-mono text-cyber-cyan">
         <AlertCircle className="w-4 h-4 text-cyber-cyan shrink-0" />
         <span>
           <strong>Zero Transmission Sandbox:</strong> This is a local simulator. No keystrokes are ever stored or sent across any network.
@@ -92,7 +92,7 @@ export default function PasswordMission({ onComplete }) {
             value={password}
             onChange={handleInputChange}
             placeholder="Type a strong custom password..."
-            className="w-full bg-cyber-900 border border-cyan-500/40 focus:border-cyber-cyan focus:outline-none focus:ring-2 focus:ring-cyber-cyan/20 text-white font-mono text-base sm:text-lg px-4 py-3 rounded-xl transition-all"
+            className="w-full bg-cyber-900 border border-cyber-cyan/40 focus:border-cyber-cyan focus:outline-none focus:ring-2 focus:ring-cyber-cyan/20 text-white font-mono text-base sm:text-lg px-4 py-3 rounded-xl transition-all"
             autoComplete="off"
             spellCheck="false"
           />

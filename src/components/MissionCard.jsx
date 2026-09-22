@@ -36,7 +36,7 @@ export default function MissionCard({
           ? 'bg-cyber-900/60 border-cyber-green/40 hover:border-cyber-green hover:shadow-glow-green/30 cursor-pointer'
           : isActiveThreat
           ? 'bg-cyber-950 border-cyber-red/60 hover:border-cyber-red shadow-glow-red/40 threat-corner cursor-pointer'
-          : 'bg-cyber-950/70 border-slate-800/80 hover:border-cyan-500/40 hover:bg-cyber-900/50 cursor-pointer'
+          : 'bg-cyber-950/70 border-slate-800/80 hover:border-cyber-cyan/40 hover:bg-cyber-900/50 cursor-pointer'
       }`}
     >
       {/* Top Meta Line */}

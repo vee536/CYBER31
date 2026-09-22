@@ -26,7 +26,7 @@ export default function OtpMission({ onComplete }) {
         {/* Incoming Call Header */}
         <div className="bg-slate-900 border border-slate-800 p-4 rounded-xl mb-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-cyan-950 border border-cyan-500/50 flex items-center justify-center text-cyan-400 animate-pulse">
+            <div className="w-10 h-10 rounded-full bg-cyber-950 border border-cyber-cyan/50 flex items-center justify-center text-cyber-cyan animate-pulse">
               <PhoneCall className="w-5 h-5" />
             </div>
             <div>
@@ -45,10 +45,10 @@ export default function OtpMission({ onComplete }) {
 
         {/* Live Audio Dialogue Transcript */}
         <div className="bg-cyber-900/50 border border-slate-800 rounded-xl p-3.5 mb-4 text-xs font-sans text-slate-200 space-y-2">
-          <p className="text-cyan-400 font-mono text-[11px]">
+          <p className="text-cyber-cyan font-mono text-[11px]">
             [CALLER]: "Hello, this is Marcus from Campus Security Operations. We're actively blocking an unauthorized IP from logging into your account."
           </p>
-          <p className="text-cyan-400 font-mono text-[11px]">
+          <p className="text-cyber-cyan font-mono text-[11px]">
             [CALLER]: "I just sent a 6-digit emergency verification code to your phone. Read it back to me immediately so I can lock down the intruder's connection!"
           </p>
           <div className="p-2.5 rounded-lg bg-cyber-950 border border-slate-800 text-[11px] font-mono text-slate-300">

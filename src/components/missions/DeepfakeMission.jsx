@@ -59,11 +59,11 @@ export default function DeepfakeMission({ onComplete }) {
           <div className="absolute inset-0 bg-gradient-to-t from-black via-slate-900/80 to-transparent z-10" />
           
           <div className="relative z-20 flex flex-col items-center">
-            <div className="w-24 h-24 rounded-full bg-cyber-800 border-2 border-cyan-400/60 flex items-center justify-center text-3xl shadow-glow-cyan-sm">
+            <div className="w-24 h-24 rounded-full bg-cyber-800 border-2 border-cyber-cyan/60 flex items-center justify-center text-3xl shadow-glow-cyan-sm">
               👨‍🏫
             </div>
             <span className="text-xs font-bold text-white mt-2">Dr. Vance (University Dean)</span>
-            <span className="text-[10px] font-mono text-cyan-400">Audio Synthesis Confidence: 99.4%</span>
+            <span className="text-[10px] font-mono text-cyber-cyan">Audio Synthesis Confidence: 99.4%</span>
           </div>
 
           {/* Clickable AI Glitch Hotspot */}
@@ -81,7 +81,7 @@ export default function DeepfakeMission({ onComplete }) {
 
         {/* Dialogue Box */}
         <div className="p-4 bg-cyber-900/60 space-y-2 text-xs font-sans text-slate-200">
-          <p className="font-mono text-cyan-300 text-[11px]">
+          <p className="font-mono text-cyber-cyan text-[11px]">
             [SYNTHETIC VOICE]: "Hello, I am in an emergency meeting and my mobile banking is locked. I need you to purchase three $200 Apple gift cards for a guest speaker immediately and text me the back codes. I will reimburse you tomorrow."
           </p>
         </div>
