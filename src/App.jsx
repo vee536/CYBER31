@@ -10,7 +10,10 @@ import {
   resetProgress,
   getSecurityLevel,
   syncFromCloud,
+  migrateAnonymousProgressToUser,
 } from './utils/storage';
+import { getSession, onAuthStateChange } from './utils/authClient';
+import { getMaxUnlockedDay, isDayUnlocked, getCampaignStarted } from './utils/dateGate';
 import { cyberAudio } from './utils/audio';
 
 import LoadingScreen from './components/LoadingScreen';
@@ -20,6 +23,7 @@ import Dashboard from './components/Dashboard';
 import DigitalUniverse from './components/DigitalUniverse';
 import MissionModal from './components/MissionModal';
 import AchievementsModal from './components/AchievementsModal';
+import AuthPanel from './components/AuthPanel';
 import DemoToolbar from './components/DemoToolbar';
 
 export default function App() {
@@ -29,37 +33,46 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard'); // 'dashboard', 'story', 'universe'
   const [currentMission, setCurrentMission] = useState(null);
   const [isAchievementsOpen, setIsAchievementsOpen] = useState(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [isMuted, setIsMuted] = useState(cyberAudio.isMuted());
+  const [user, setUser] = useState(null);
 
-  // Reviewer/demo controls are only exposed in local dev or via an explicit ?review=1 flag,
-  // so ordinary visitors on the deployed site can't instantly unlock or wipe their progress.
+  // Reviewer/demo controls (and the daily-unlock calendar) are only bypassed in
+  // local dev or via an explicit ?review=1 flag, so ordinary visitors on the
+  // deployed site can't instantly unlock or wipe their progress or skip ahead.
   const showDemoToolbar =
     import.meta.env.DEV ||
     new URLSearchParams(window.location.search).get('review') === '1';
 
-  // Initialize storage, then reconcile with cloud progress (if Supabase is configured)
+  const maxUnlockedDay = useMemo(() => getMaxUnlockedDay(showDemoToolbar), [showDemoToolbar]);
+  const campaignStarted = useMemo(() => getCampaignStarted(showDemoToolbar), [showDemoToolbar]);
+
+  // Initialize storage, auth session, then reconcile with cloud progress (if Supabase is configured)
   useEffect(() => {
     setCompletedDays(getCompletedMissions());
     setStreak(getStreak());
 
-    syncFromCloud().then((merged) => {
-      if (merged) {
-        setCompletedDays(merged);
-        setStreak(getStreak());
-      }
+    getSession().then((session) => {
+      const currentUser = session?.user ?? null;
+      setUser(currentUser);
+      syncFromCloud(currentUser?.id ?? null).then((merged) => {
+        if (merged) {
+          setCompletedDays(merged);
+          setStreak(getStreak());
+        }
+      });
     });
+
+    const unsubscribe = onAuthStateChange((session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return unsubscribe;
   }, []);
 
-  // Today's mission: find first uncompleted day or default to Day 5 (Phishing Sample)
-  const todayDay = useMemo(() => {
-    // If Day 5 isn't completed, recommend Day 5 for the user showcase
-    if (!completedDays.includes(5)) return 5;
-    // Otherwise find the lowest uncompleted day
-    for (let d = 1; d <= 31; d++) {
-      if (!completedDays.includes(d)) return d;
-    }
-    return 1;
-  }, [completedDays]);
+  // Today's mission spotlight: the most recently unlocked day on the real-world
+  // calendar (Day N unlocks on Oct N). Falls back to Day 1 before the campaign starts.
+  const todayDay = maxUnlockedDay > 0 ? maxUnlockedDay : 1;
 
   const securityLevel = useMemo(() => {
     return Math.round((completedDays.length / 31) * 100);
@@ -79,8 +92,12 @@ export default function App() {
     }
   };
 
-  // Open a specific mission
+  // Open a specific mission (blocked if its day hasn't unlocked yet)
   const handleOpenMission = (dayNumber) => {
+    if (!isDayUnlocked(dayNumber, showDemoToolbar)) {
+      cyberAudio.playClick();
+      return;
+    }
     const target = MISSIONS.find((m) => m.day === dayNumber);
     if (target) {
       setCurrentMission(target);
@@ -89,7 +106,7 @@ export default function App() {
 
   // Mission Completed Callback
   const handleMissionCompleted = (dayNumber) => {
-    const updated = saveMissionCompletion(dayNumber);
+    const updated = saveMissionCompletion(dayNumber, user?.id ?? null);
     setCompletedDays(updated);
     setStreak(getStreak());
 
@@ -117,9 +134,19 @@ export default function App() {
     }
   };
 
+  // Called by AuthPanel after a successful login/signup/signout
+  const handleAuthed = async (nextUser) => {
+    setUser(nextUser);
+    if (nextUser) {
+      const merged = await migrateAnonymousProgressToUser(nextUser.id);
+      setCompletedDays(merged);
+      setStreak(getStreak());
+    }
+  };
+
   // Demo actions
   const handleUnlockAll = () => {
-    const all = unlockAllMissions();
+    const all = unlockAllMissions(user?.id ?? null);
     setCompletedDays(all);
     setStreak(31);
     cyberAudio.playUnlock();
@@ -134,7 +161,7 @@ export default function App() {
   };
 
   const handleResetProgress = () => {
-    resetProgress();
+    resetProgress(user?.id ?? null);
     setCompletedDays([]);
     setStreak(1);
     cyberAudio.playClick();
@@ -146,7 +173,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-cyber-950 text-slate-100 flex flex-col justify-between selection:bg-cyber-cyan selection:text-black overflow-x-hidden">
-      
+
       {/* Background ambient elements */}
       <div className="fixed inset-0 cyber-grid opacity-20 pointer-events-none" />
       <div className="fixed inset-0 scanlines opacity-30 pointer-events-none" />
@@ -162,6 +189,9 @@ export default function App() {
         setActiveTab={setActiveTab}
         onStartTodayMission={handleOpenMission}
         todayDay={todayDay}
+        user={user}
+        onOpenAuth={() => setIsAuthOpen(true)}
+        campaignStarted={campaignStarted}
       />
 
       {/* Main Content Area */}
@@ -181,6 +211,9 @@ export default function App() {
             streak={streak}
             onOpenMission={handleOpenMission}
             onOpenAchievements={() => setIsAchievementsOpen(true)}
+            maxUnlockedDay={maxUnlockedDay}
+            campaignStarted={campaignStarted}
+            unlockBypass={showDemoToolbar}
           />
         )}
 
@@ -200,6 +233,7 @@ export default function App() {
               activeDay={todayDay}
               onSelectMission={handleOpenMission}
               interactive={true}
+              maxUnlockedDay={maxUnlockedDay}
             />
           </div>
         )}
@@ -241,6 +275,14 @@ export default function App() {
         isOpen={isAchievementsOpen}
         onClose={() => setIsAchievementsOpen(false)}
         completedDays={completedDays}
+      />
+
+      {/* Auth Modal */}
+      <AuthPanel
+        isOpen={isAuthOpen}
+        onClose={() => setIsAuthOpen(false)}
+        user={user}
+        onAuthed={handleAuthed}
       />
 
       {/* Reviewer / Demo Controls Toolbar (dev & ?review=1 only) */}

@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState, useMemo } from 'react';
 import { MISSIONS } from '../data/missionsData';
 import { Shield, AlertTriangle, Lock, Eye, Filter } from 'lucide-react';
 import { cyberAudio } from '../utils/audio';
+import { getUnlockDateLabel } from '../utils/dateGate';
 
 export default function DigitalUniverse({
   completedDays = [],
@@ -9,6 +10,7 @@ export default function DigitalUniverse({
   onSelectMission,
   interactive = true,
   selectedCategory = 'all',
+  maxUnlockedDay = 31,
 }) {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
@@ -258,11 +260,12 @@ export default function DigitalUniverse({
       // Render nodes
       sortedNodes.forEach((node) => {
         const isCompleted = completedDays.includes(node.day);
-        const isActiveThreat = node.day === activeDay;
+        const isDateLocked = node.day > maxUnlockedDay;
+        const isActiveThreat = node.day === activeDay && !isDateLocked;
         const isHovered = hoveredNodeRef.current && hoveredNodeRef.current.day === node.day;
 
         const baseRadius = (isHovered ? 12 : isActiveThreat ? 9 : 6.5) * node.projectedScale;
-        const alpha = Math.max(0.2, (node.z + 280) / 560);
+        const alpha = isDateLocked ? 0.35 : Math.max(0.2, (node.z + 280) / 560);
 
         ctx.save();
         ctx.globalAlpha = Math.min(1, alpha);
@@ -281,7 +284,11 @@ export default function DigitalUniverse({
         ctx.beginPath();
         ctx.arc(node.x, node.y, baseRadius, 0, Math.PI * 2);
 
-        if (isCompleted) {
+        if (isDateLocked) {
+          // Not yet unlocked on the calendar: dim inert grey, no glow
+          ctx.fillStyle = '#3a4256';
+          ctx.shadowBlur = 0;
+        } else if (isCompleted) {
           // Secured Node: Electric Cyan/Green
           ctx.fillStyle = '#00ffaa';
           ctx.shadowColor = '#00ffaa';
@@ -386,45 +393,55 @@ export default function DigitalUniverse({
       />
 
       {/* Interactive Tooltip Card when hovering a node */}
-      {hoveredNode && (
-        <div
-          onClick={handleNodeClick}
-          className="absolute bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:w-80 z-20 cyber-panel p-3.5 rounded-xl border border-cyber-cyan/50 shadow-glow-cyan cursor-pointer transition-all animate-float"
-        >
-          <div className="flex items-center justify-between mb-1.5">
-            <span className="text-xs font-mono font-bold text-cyber-cyan">
-              DAY {String(hoveredNode.day).padStart(2, '0')} // {hoveredNode.alertSource}
-            </span>
-            <span
-              className={`text-[10px] font-hud uppercase px-2 py-0.5 rounded font-bold ${
-                completedDays.includes(hoveredNode.day)
-                  ? 'bg-cyber-green-dim text-cyber-green border border-cyber-green/40'
+      {hoveredNode && (() => {
+        const isDateLocked = hoveredNode.day > maxUnlockedDay;
+        const isCompleted = completedDays.includes(hoveredNode.day);
+        return (
+          <div
+            onClick={handleNodeClick}
+            className={`absolute bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:w-80 z-20 cyber-panel p-3.5 rounded-xl border shadow-glow-cyan transition-all animate-float ${
+              isDateLocked ? 'border-slate-700 cursor-default' : 'border-cyber-cyan/50 cursor-pointer'
+            }`}
+          >
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-xs font-mono font-bold text-cyber-cyan">
+                DAY {String(hoveredNode.day).padStart(2, '0')} // {isDateLocked ? 'CLASSIFIED' : hoveredNode.alertSource}
+              </span>
+              <span
+                className={`text-[10px] font-hud uppercase px-2 py-0.5 rounded font-bold ${
+                  isDateLocked
+                    ? 'bg-slate-800 text-slate-400'
+                    : isCompleted
+                    ? 'bg-cyber-green-dim text-cyber-green border border-cyber-green/40'
+                    : hoveredNode.day === activeDay
+                    ? 'bg-cyber-red-dim text-cyber-red border border-cyber-red/40 animate-pulse'
+                    : 'bg-slate-800 text-slate-400'
+                }`}
+              >
+                {isDateLocked
+                  ? `UNLOCKS ${getUnlockDateLabel(hoveredNode.day).toUpperCase()}`
+                  : isCompleted
+                  ? '✓ SECURED'
                   : hoveredNode.day === activeDay
-                  ? 'bg-cyber-red-dim text-cyber-red border border-cyber-red/40 animate-pulse'
-                  : 'bg-slate-800 text-slate-400'
-              }`}
-            >
-              {completedDays.includes(hoveredNode.day)
-                ? '✓ SECURED'
-                : hoveredNode.day === activeDay
-                ? '⚠️ THREAT ACTIVE'
-                : 'LOCKED'}
-            </span>
-          </div>
+                  ? '⚠️ THREAT ACTIVE'
+                  : 'OPEN'}
+              </span>
+            </div>
 
-          <h4 className="text-sm font-cyber font-bold text-white mb-1 leading-snug">
-            {hoveredNode.title}
-          </h4>
-          <p className="text-xs text-slate-300 line-clamp-2 mb-2 font-sans">
-            {hoveredNode.topic}
-          </p>
+            <h4 className="text-sm font-cyber font-bold text-white mb-1 leading-snug">
+              {isDateLocked ? '??? Classified Until Unlock ???' : hoveredNode.title}
+            </h4>
+            <p className="text-xs text-slate-300 line-clamp-2 mb-2 font-sans">
+              {isDateLocked ? `This mission unlocks ${getUnlockDateLabel(hoveredNode.day)}.` : hoveredNode.topic}
+            </p>
 
-          <div className="flex items-center justify-between pt-1 border-t border-slate-800 text-[11px] font-mono text-cyan-400">
-            <span>TAP TO LAUNCH MISSION</span>
-            <Eye className="w-3.5 h-3.5" />
+            <div className="flex items-center justify-between pt-1 border-t border-slate-800 text-[11px] font-mono text-cyan-400">
+              <span>{isDateLocked ? 'RETURN ON UNLOCK DATE' : 'TAP TO LAUNCH MISSION'}</span>
+              <Eye className="w-3.5 h-3.5" />
+            </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
 
       {/* Bottom Hint */}
       <div className="absolute bottom-2 left-3 text-[10px] font-mono text-slate-500 pointer-events-none hidden sm:block">

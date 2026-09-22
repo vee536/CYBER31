@@ -31,7 +31,8 @@ A gamified cybersecurity awareness campaign that turns real-world online threats
 - [Mission Categories](#mission-categories)
 - [Tech Stack](#tech-stack)
 - [Getting Started](#getting-started)
-- [Progress Persistence](#progress-persistence)
+- [Daily Unlock Calendar](#daily-unlock-calendar)
+- [Progress Persistence & Accounts](#progress-persistence--accounts)
 - [Reviewer / Demo Controls](#reviewer--demo-controls)
 - [Project Structure](#project-structure)
 - [Deployment](#deployment)
@@ -51,6 +52,8 @@ It was built for **THM Cyber Week**, but works as a standalone awareness tool fo
 | 🕹️ **Tap-to-investigate gameplay** | Spot the red flags yourself inside a simulated email/SMS/website/app rather than reading a wall of text |
 | 🌐 **3D "Digital Universe" view** | All 31 missions rendered as an explorable, draggable node graph on an HTML canvas |
 | 🏆 **Achievements & streaks** | Milestone badges unlock as missions are completed, with a defense-streak counter |
+| 📅 **Daily-unlock calendar** | Day N unlocks on October N — miss a day and catch up anytime, it stays unlocked afterward |
+| 👤 **Accounts (optional)** | Email/password sign-up via Supabase Auth; progress follows you across devices once signed in |
 | 📱 **Fully responsive** | Works down to small mobile viewports, with a dedicated bottom nav bar |
 | ☁️ **Optional cloud sync** | Progress persists to `localStorage` by default, with opt-in cross-device sync via Supabase |
 | ♿ **Keyboard accessible** | Mission cards and interactive choices are reachable and operable without a mouse |
@@ -92,20 +95,33 @@ npm run build    # production build to dist/
 npm run preview  # preview the production build locally
 ```
 
-## Progress Persistence
+## Daily Unlock Calendar
 
-Mission completion, streaks, and achievements are saved to `localStorage` by default — no setup required.
+Missions follow a real advent-calendar schedule: **Day N unlocks on October N** (of the campaign year configured in [`src/utils/dateGate.js`](src/utils/dateGate.js)). Once a day's date arrives, it stays unlocked permanently — so a visitor who misses a few days can always catch up. Locked missions show a "Classified until unlock" state instead of their content.
 
-### Optional: cross-device cloud sync
+Two escape hatches bypass the calendar entirely (both also unlock the reviewer toolbar — see below):
+- Running locally in dev mode (`npm run dev`)
+- Appending `?review=1` to any deployed URL
 
-The app can optionally sync progress to a [Supabase](https://supabase.com) project so progress follows a visitor across devices/browsers:
+## Progress Persistence & Accounts
+
+Mission completion, streaks, and achievements are saved to `localStorage` by default — no setup required, and no account needed to play.
+
+### Optional: accounts + cross-device cloud sync
+
+The app can optionally sync progress to a [Supabase](https://supabase.com) project, with two identities layered on top of each other:
+
+- **Anonymous**: every visitor gets a random device id on first visit; progress syncs to that id so it survives a page refresh or reopening the tab later on the same browser.
+- **Authenticated**: signing up (email + password, via the account icon in the header) attaches progress to a real account, so it follows the visitor across devices/browsers. Any existing on-device progress is merged into the account automatically on signup/login.
+
+To enable it:
 
 1. Create a free Supabase project.
-2. Run [`supabase/schema.sql`](supabase/schema.sql) in the project's SQL editor.
+2. Run [`supabase/schema.sql`](supabase/schema.sql) in the project's SQL editor. It's safe to re-run — the script is idempotent and will migrate an older device-id-only version of the table if you ran an earlier version of this schema.
 3. Copy `.env.example` to `.env.local` and fill in `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` from **Project Settings → API Keys → "Publishable and secret API keys"** tab — use the **Publishable key** (`sb_publishable_...`). Do not use the Secret key or the legacy `service_role`/`anon` JWT keys.
 4. Restart the dev server.
 
-Without those env vars set, the app runs exactly as before, on `localStorage` alone — cloud sync is fully optional and fails silently if unreachable.
+Without those env vars set, the app runs exactly as before, on `localStorage` alone — accounts and cloud sync are fully optional and fail silently if unreachable. Email/password sign-up is enabled by default on new Supabase projects; if your project has "Confirm email" turned on (Authentication → Providers → Email), new users will need to click the confirmation link before their first login.
 
 ## Reviewer / Demo Controls
 
@@ -126,7 +142,8 @@ src/
 │   ├── Dashboard.jsx     # Mission grid, filters, security level summary
 │   ├── DigitalUniverse.jsx  # Canvas-based 3D node graph of all 31 missions
 │   ├── MissionModal.jsx  # Mission runner: routes to the right mission component
-│   ├── CyberHeader.jsx   # Nav, security badge, achievements, audio toggle
+│   ├── CyberHeader.jsx   # Nav, security badge, achievements, audio, account
+│   ├── AuthPanel.jsx     # Sign up / log in / account modal
 │   └── ...
 ├── data/
 │   ├── missionsData.js   # All 31 mission definitions (briefing, scenario, takeaway)
@@ -135,6 +152,8 @@ src/
 ├── utils/
 │   ├── storage.js        # localStorage persistence + Supabase sync orchestration
 │   ├── supabaseClient.js # Optional Supabase client (no-op if unconfigured)
+│   ├── authClient.js     # Supabase Auth wrapper (no-op if unconfigured)
+│   ├── dateGate.js        # Day-N-unlocks-on-Oct-N calendar logic
 │   └── audio.js          # Web Audio SFX
 └── App.jsx
 

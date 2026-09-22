@@ -18,6 +18,7 @@ import { MISSIONS, CATEGORIES } from '../data/missionsData';
 import MissionCard from './MissionCard';
 import DigitalUniverse from './DigitalUniverse';
 import { cyberAudio } from '../utils/audio';
+import { isDayUnlocked, getUnlockDateLabel, getCampaignStartLabel } from '../utils/dateGate';
 
 export default function Dashboard({
   completedDays = [],
@@ -25,6 +26,9 @@ export default function Dashboard({
   streak = 6,
   onOpenMission,
   onOpenAchievements,
+  maxUnlockedDay = 31,
+  campaignStarted = true,
+  unlockBypass = false,
 }) {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [filterStatus, setFilterStatus] = useState('all'); // all, threat, secured
@@ -172,60 +176,76 @@ export default function Dashboard({
         </div>
 
         {/* Right Column: TODAY'S MISSION SPOTLIGHT (7 cols) */}
-        <div className="lg:col-span-7 cyber-panel-threat p-6 sm:p-7 rounded-3xl flex flex-col justify-between border-cyber-red/50 threat-corner shadow-2xl relative overflow-hidden">
-          
-          <div className="absolute top-0 right-0 w-64 h-64 bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
+        {campaignStarted ? (
+          <div className="lg:col-span-7 cyber-panel-threat p-6 sm:p-7 rounded-3xl flex flex-col justify-between border-cyber-red/50 threat-corner shadow-2xl relative overflow-hidden">
 
-          <div>
-            {/* Header tags */}
-            <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-950 border border-red-500/60 text-xs font-mono font-bold text-cyber-red animate-pulse">
-                <Radio className="w-3.5 h-3.5" />
-                <span>DAY {String(todayMission.day).padStart(2, '0')} / 31 // ACTIVE SIGNAL DETECTED</span>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
+
+            <div>
+              {/* Header tags */}
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-950 border border-red-500/60 text-xs font-mono font-bold text-cyber-red animate-pulse">
+                  <Radio className="w-3.5 h-3.5" />
+                  <span>DAY {String(todayMission.day).padStart(2, '0')} / 31 // ACTIVE SIGNAL DETECTED</span>
+                </div>
+
+                <span className="text-xs font-mono uppercase tracking-widest text-slate-300 bg-cyber-900/80 px-2.5 py-1 rounded border border-slate-700">
+                  SEVERITY: {todayMission.threatSeverity}
+                </span>
               </div>
 
-              <span className="text-xs font-mono uppercase tracking-widest text-slate-300 bg-cyber-900/80 px-2.5 py-1 rounded border border-slate-700">
-                SEVERITY: {todayMission.threatSeverity}
-              </span>
+              {/* Mission Type & Title */}
+              <div className="text-xs font-hud font-bold text-amber-400 uppercase tracking-widest mb-1">
+                MISSION TYPE: {todayMission.threatType.toUpperCase()}
+              </div>
+
+              <h3 className="text-2xl sm:text-3xl font-black font-cyber text-white mb-2">
+                {todayMission.title}
+              </h3>
+
+              <p className="text-xs font-hud text-cyber-cyan font-bold mb-3">
+                TOPIC: {todayMission.topic}
+              </p>
+
+              <p className="text-xs sm:text-sm font-sans text-slate-200 mb-6 leading-relaxed bg-black/40 p-3.5 rounded-xl border border-red-900/40">
+                {todayMission.briefing}
+              </p>
             </div>
 
-            {/* Mission Type & Title */}
-            <div className="text-xs font-hud font-bold text-amber-400 uppercase tracking-widest mb-1">
-              MISSION TYPE: {todayMission.threatType.toUpperCase()}
+            {/* Action Row */}
+            <div className="flex flex-col sm:flex-row items-center gap-3 pt-3 border-t border-red-900/40">
+              <button
+                onClick={() => onOpenMission(todayMission.day)}
+                className="w-full sm:flex-1 py-4 px-6 rounded-xl font-cyber font-bold text-xs sm:text-sm uppercase tracking-wider bg-gradient-to-r from-cyber-red via-orange-500 to-cyber-cyan text-white shadow-glow-red hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2.5"
+              >
+                <Zap className="w-4 h-4" />
+                <span>{isTodayCompleted ? 'REPLAY MISSION' : 'BEGIN MISSION'}</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+
+              {isTodayCompleted && (
+                <span className="text-xs font-mono text-cyber-green flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4" />
+                  <span>Node Currently Secured</span>
+                </span>
+              )}
             </div>
-            
-            <h3 className="text-2xl sm:text-3xl font-black font-cyber text-white mb-2">
-              {todayMission.title}
+          </div>
+        ) : (
+          <div className="lg:col-span-7 cyber-panel p-6 sm:p-7 rounded-3xl flex flex-col items-center justify-center text-center hud-corner shadow-2xl relative overflow-hidden gap-3">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="w-14 h-14 rounded-2xl bg-cyber-900 border border-cyber-cyan/40 flex items-center justify-center text-cyber-cyan">
+              <Radio className="w-7 h-7" />
+            </div>
+            <h3 className="text-xl sm:text-2xl font-black font-cyber text-white">
+              CAMPAIGN NOT YET LIVE
             </h3>
-
-            <p className="text-xs font-hud text-cyber-cyan font-bold mb-3">
-              TOPIC: {todayMission.topic}
-            </p>
-
-            <p className="text-xs sm:text-sm font-sans text-slate-200 mb-6 leading-relaxed bg-black/40 p-3.5 rounded-xl border border-red-900/40">
-              {todayMission.briefing}
+            <p className="text-xs sm:text-sm font-sans text-slate-400 max-w-sm">
+              Mission Day 01 activates on <span className="text-cyber-cyan font-bold">{getCampaignStartLabel()}</span>.
+              A new mission unlocks every day of October — check back then, or explore the roadmap below.
             </p>
           </div>
-
-          {/* Action Row */}
-          <div className="flex flex-col sm:flex-row items-center gap-3 pt-3 border-t border-red-900/40">
-            <button
-              onClick={() => onOpenMission(todayMission.day)}
-              className="w-full sm:flex-1 py-4 px-6 rounded-xl font-cyber font-bold text-xs sm:text-sm uppercase tracking-wider bg-gradient-to-r from-cyber-red via-orange-500 to-cyber-cyan text-white shadow-glow-red hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2.5"
-            >
-              <Zap className="w-4 h-4" />
-              <span>{isTodayCompleted ? 'REPLAY MISSION' : 'BEGIN MISSION'}</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-
-            {isTodayCompleted && (
-              <span className="text-xs font-mono text-cyber-green flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4" />
-                <span>Node Currently Secured</span>
-              </span>
-            )}
-          </div>
-        </div>
+        )}
       </section>
 
       {/* =========================================================================
@@ -335,6 +355,7 @@ export default function Dashboard({
           {filteredMissions.map((mission) => {
             const isCompleted = completedDays.includes(mission.day);
             const isActiveThreat = mission.day === activeDay;
+            const isLocked = !isDayUnlocked(mission.day, unlockBypass);
 
             return (
               <MissionCard
@@ -342,6 +363,8 @@ export default function Dashboard({
                 mission={mission}
                 isCompleted={isCompleted}
                 isActiveThreat={isActiveThreat}
+                isLocked={isLocked}
+                unlockDateLabel={getUnlockDateLabel(mission.day)}
                 onClick={onOpenMission}
               />
             );

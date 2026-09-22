@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, Volume2, VolumeX, Award, Radio, Menu, X, Compass, Target, Globe } from 'lucide-react';
+import { Shield, Volume2, VolumeX, Award, Radio, Menu, X, Compass, Target, Globe, UserCircle2 } from 'lucide-react';
 import { cyberAudio } from '../utils/audio';
 
 export default function CyberHeader({
@@ -11,7 +11,10 @@ export default function CyberHeader({
   activeTab = 'dashboard',
   setActiveTab,
   onStartTodayMission,
-  todayDay = 5
+  todayDay = 5,
+  user = null,
+  onOpenAuth,
+  campaignStarted = true,
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -136,6 +139,25 @@ export default function CyberHeader({
               {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
             </button>
 
+            {/* Account / Sign In */}
+            <button
+              onClick={() => {
+                cyberAudio.playClick();
+                onOpenAuth();
+              }}
+              title={user ? user.email : 'Sign In'}
+              className={`relative p-2 rounded-xl border transition-all shrink-0 ${
+                user
+                  ? 'bg-cyber-cyan/15 border-cyber-cyan text-cyber-cyan shadow-glow-cyan-sm'
+                  : 'bg-cyber-900 border-slate-700 text-slate-300 hover:border-cyber-cyan/60 hover:text-cyber-cyan'
+              }`}
+            >
+              <UserCircle2 className="w-4 h-4" />
+              {user && (
+                <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-cyber-green border border-cyber-950" />
+              )}
+            </button>
+
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -206,12 +228,18 @@ export default function CyberHeader({
         <button
           onClick={() => {
             cyberAudio.playClick();
-            onStartTodayMission(todayDay);
+            if (campaignStarted) onStartTodayMission(todayDay);
           }}
-          className="flex-[1.4] py-2.5 px-3 rounded-xl text-xs font-cyber font-bold tracking-wider uppercase flex items-center justify-center gap-2 bg-gradient-to-r from-cyber-cyan to-blue-500 text-black shadow-glow-cyan transition-all active:scale-95"
+          disabled={!campaignStarted}
+          title={campaignStarted ? undefined : 'Campaign starts October 1'}
+          className={`flex-[1.4] py-2.5 px-3 rounded-xl text-xs font-cyber font-bold tracking-wider uppercase flex items-center justify-center gap-2 transition-all active:scale-95 ${
+            campaignStarted
+              ? 'bg-gradient-to-r from-cyber-cyan to-blue-500 text-black shadow-glow-cyan'
+              : 'bg-cyber-900 text-slate-500 border border-slate-800 cursor-not-allowed'
+          }`}
         >
-          <Radio className="w-4 h-4 text-black animate-pulse" />
-          Today's Mission
+          <Radio className={`w-4 h-4 ${campaignStarted ? 'text-black animate-pulse' : 'text-slate-500'}`} />
+          {campaignStarted ? "Today's Mission" : 'Starts Oct 1'}
         </button>
       </div>
     </>
