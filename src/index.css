@@ -1,23 +1,23 @@
-﻿@tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   body {
-    font-family: 'Inter', system-ui, sans-serif;
-    background-color: #0a0e1f;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    background-color: #0d1119;
     color: #e2e8f0;
     touch-action: manipulation;
   }
 
   .font-cyber {
-    font-family: 'Orbitron', 'Rajdhani', sans-serif;
-    letter-spacing: 0.05em;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 700;
   }
 
   .font-hud {
-    font-family: 'Rajdhani', sans-serif;
-    letter-spacing: 0.08em;
+    font-family: 'Ubuntu', sans-serif;
+    letter-spacing: 0.02em;
   }
 
   .font-mono {
@@ -28,55 +28,50 @@
 /* Cyber Grid background */
 .cyber-grid {
   background-image:
-    linear-gradient(to right, rgba(198, 255, 77, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(198, 255, 77, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(163, 234, 42, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(163, 234, 42, 0.03) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
 .cyber-grid-dense {
   background-image:
-    linear-gradient(to right, rgba(198, 255, 77, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(198, 255, 77, 0.06) 1px, transparent 1px);
+    linear-gradient(to right, rgba(163, 234, 42, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(163, 234, 42, 0.05) 1px, transparent 1px);
   background-size: 16px 16px;
 }
 
-/* Glassmorphic Panel */
+/* Panel */
 .cyber-panel {
-  background: rgba(15, 21, 41, 0.75);
+  background: rgba(21, 28, 43, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(198, 255, 77, 0.18);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(163, 234, 42, 0.12);
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.4);
 }
 
 .cyber-panel-threat {
-  background: rgba(30, 10, 20, 0.85);
+  background: rgba(38, 16, 24, 0.9);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 51, 102, 0.4);
-  box-shadow: 0 8px 32px 0 rgba(255, 51, 102, 0.2);
+  border: 1px solid rgba(255, 51, 102, 0.3);
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.4);
 }
 
 .cyber-panel-secured {
-  background: rgba(10, 30, 24, 0.85);
+  background: rgba(14, 33, 27, 0.9);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 255, 170, 0.4);
-  box-shadow: 0 8px 32px 0 rgba(0, 255, 170, 0.2);
+  border: 1px solid rgba(62, 207, 142, 0.3);
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.4);
 }
 
 /* Subtle scanlines overlay */
 .scanlines {
   background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%, 
-    rgba(0, 0, 0, 0.25) 50%
-  ), linear-gradient(
-    90deg,
-    rgba(255, 0, 0, 0.03),
-    rgba(0, 255, 0, 0.01),
-    rgba(0, 0, 255, 0.03)
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.15) 50%
   );
-  background-size: 100% 3px, 6px 100%;
+  background-size: 100% 3px;
   pointer-events: none;
 }
 
@@ -89,34 +84,33 @@
   position: absolute;
   width: 8px;
   height: 8px;
-  border-color: rgba(198, 255, 77, 0.6);
   pointer-events: none;
 }
 .hud-corner::before {
   top: -1px;
   left: -1px;
-  border-top: 2px solid rgba(198, 255, 77, 0.7);
-  border-left: 2px solid rgba(198, 255, 77, 0.7);
+  border-top: 2px solid rgba(163, 234, 42, 0.5);
+  border-left: 2px solid rgba(163, 234, 42, 0.5);
 }
 .hud-corner::after {
   bottom: -1px;
   right: -1px;
-  border-bottom: 2px solid rgba(198, 255, 77, 0.7);
-  border-right: 2px solid rgba(198, 255, 77, 0.7);
+  border-bottom: 2px solid rgba(163, 234, 42, 0.5);
+  border-right: 2px solid rgba(163, 234, 42, 0.5);
 }
 
 /* Threat Corner Reticles */
 .threat-corner::before {
   top: -1px;
   left: -1px;
-  border-top: 2px solid rgba(255, 51, 102, 0.8);
-  border-left: 2px solid rgba(255, 51, 102, 0.8);
+  border-top: 2px solid rgba(255, 51, 102, 0.6);
+  border-left: 2px solid rgba(255, 51, 102, 0.6);
 }
 .threat-corner::after {
   bottom: -1px;
   right: -1px;
-  border-bottom: 2px solid rgba(255, 51, 102, 0.8);
-  border-right: 2px solid rgba(255, 51, 102, 0.8);
+  border-bottom: 2px solid rgba(255, 51, 102, 0.6);
+  border-right: 2px solid rgba(255, 51, 102, 0.6);
 }
 
 /* Custom Scrollbar */
@@ -125,28 +119,12 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0e1424;
+  background: #151c2b;
 }
 ::-webkit-scrollbar-thumb {
-  background: #212c52;
+  background: #2c3752;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #c6ff4d;
-}
-
-/* Threat Glitch Effect - applied ONLY to alerts / threat beacons */
-.threat-glitch {
-  position: relative;
-}
-@keyframes subtle-glitch {
-  0% { transform: translate(0); }
-  20% { transform: translate(-2px, 1px); }
-  40% { transform: translate(2px, -1px); }
-  60% { transform: translate(-1px, 2px); }
-  80% { transform: translate(1px, -1px); }
-  100% { transform: translate(0); }
-}
-.animate-glitch {
-  animation: subtle-glitch 2.5s infinite ease-in-out;
+  background: #a3ea2a;
 }

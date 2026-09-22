@@ -85,7 +85,7 @@ export default function UsbMission({ onComplete }) {
 
           <button
             onClick={onComplete}
-            className="w-full py-3.5 px-6 rounded-xl font-cyber font-bold text-xs uppercase tracking-wider bg-gradient-to-r from-cyber-green to-cyber-cyan text-black shadow-glow-green hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
+            className="w-full py-3.5 px-6 rounded-xl font-cyber font-bold text-xs uppercase tracking-wider bg-cyber-cyan text-cyber-950 shadow-glow-green hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
           >
             <span>HARDWARE SECURED // CONTINUE</span>
             <ArrowRight className="w-4 h-4 text-black" />

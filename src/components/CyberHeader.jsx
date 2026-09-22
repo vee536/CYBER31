@@ -234,7 +234,7 @@ export default function CyberHeader({
           title={campaignStarted ? undefined : 'Campaign starts October 1'}
           className={`flex-[1.4] py-2.5 px-3 rounded-xl text-xs font-cyber font-bold tracking-wider uppercase flex items-center justify-center gap-2 transition-all active:scale-95 ${
             campaignStarted
-              ? 'bg-gradient-to-r from-cyber-cyan to-cyber-green text-black shadow-glow-cyan'
+              ? 'bg-cyber-cyan text-cyber-950 shadow-glow-cyan'
               : 'bg-cyber-900 text-slate-500 border border-slate-800 cursor-not-allowed'
           }`}
         >

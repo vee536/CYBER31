@@ -125,7 +125,7 @@ export default function App() {
             particleCount: 80,
             spread: 70,
             origin: { y: 0.6 },
-            colors: ['#c6ff4d', '#a855f7', '#3ecf8e'],
+            colors: ['#a3ea2a', '#a855f7', '#3ecf8e'],
           });
         } catch (e) {
           // Confetti fallback
@@ -155,7 +155,7 @@ export default function App() {
         particleCount: 120,
         spread: 90,
         origin: { y: 0.5 },
-        colors: ['#c6ff4d', '#3ecf8e', '#ffb020'],
+        colors: ['#a3ea2a', '#3ecf8e', '#ffb020'],
       });
     } catch (e) {}
   };

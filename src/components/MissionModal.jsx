@@ -170,7 +170,7 @@ export default function MissionModal({
 
               <button
                 onClick={() => handleStepTransition(2)}
-                className="w-full sm:w-auto py-3.5 px-10 rounded-xl font-cyber font-bold text-xs sm:text-sm uppercase tracking-wider bg-gradient-to-r from-cyber-red to-orange-500 text-white shadow-glow-red hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
+                className="w-full sm:w-auto py-3.5 px-10 rounded-xl font-cyber font-bold text-xs sm:text-sm uppercase tracking-wider bg-cyber-red text-white shadow-glow-red hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
               >
                 <span>OPEN MISSION BRIEFING</span>
                 <ArrowRight className="w-4 h-4" />
@@ -214,7 +214,7 @@ export default function MissionModal({
               <div className="w-full flex justify-end">
                 <button
                   onClick={() => handleStepTransition(3)}
-                  className="w-full sm:w-auto py-3.5 px-8 rounded-xl font-cyber font-bold text-xs uppercase tracking-wider bg-gradient-to-r from-cyber-cyan to-cyber-green text-black shadow-glow-cyan hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto py-3.5 px-8 rounded-xl font-cyber font-bold text-xs uppercase tracking-wider bg-cyber-cyan text-cyber-950 shadow-glow-cyan hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
                 >
                   <span>COMMENCE TASK INTERACTION</span>
                   <ArrowRight className="w-4 h-4 text-black" />
@@ -291,7 +291,7 @@ export default function MissionModal({
               <div className="w-full flex justify-end">
                 <button
                   onClick={() => handleStepTransition(6)}
-                  className="w-full sm:w-auto py-3.5 px-8 rounded-xl font-cyber font-bold text-xs uppercase tracking-wider bg-gradient-to-r from-cyber-green to-cyber-cyan text-black shadow-glow-green hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto py-3.5 px-8 rounded-xl font-cyber font-bold text-xs uppercase tracking-wider bg-cyber-cyan text-cyber-950 shadow-glow-green hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
                 >
                   <span>UPDATE DEFENSE GRID</span>
                   <ArrowRight className="w-4 h-4 text-black" />
@@ -323,7 +323,7 @@ export default function MissionModal({
 
               <button
                 onClick={handleFinalComplete}
-                className="w-full sm:w-auto py-4 px-10 rounded-xl font-cyber font-bold text-xs sm:text-sm uppercase tracking-wider bg-gradient-to-r from-cyber-cyan via-cyber-green to-cyber-green text-black shadow-glow-cyan hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
+                className="w-full sm:w-auto py-4 px-10 rounded-xl font-cyber font-bold text-xs sm:text-sm uppercase tracking-wider bg-cyber-cyan text-cyber-950 shadow-glow-cyan hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
               >
                 <span>RETURN TO COMMAND CENTER</span>
                 <ArrowRight className="w-4 h-4 text-black" />

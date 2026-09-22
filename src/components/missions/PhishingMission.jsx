@@ -215,7 +215,7 @@ export default function PhishingMission({ onComplete }) {
 
           <button
             onClick={onComplete}
-            className="w-full sm:w-auto py-3.5 px-8 rounded-xl font-cyber font-bold text-sm uppercase tracking-wider bg-gradient-to-r from-cyber-green to-cyber-cyan text-black shadow-glow-green hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
+            className="w-full sm:w-auto py-3.5 px-8 rounded-xl font-cyber font-bold text-sm uppercase tracking-wider bg-cyber-cyan text-cyber-950 shadow-glow-green hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
           >
             <span>NEUTRALIZE THREAT & CONTINUE</span>
             <ArrowRight className="w-4 h-4 text-black" />

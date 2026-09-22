@@ -63,7 +63,7 @@ export default function StoryIntro({ onEnterMissionControl, onStartTodayMission,
               cyberAudio.playClick();
               onStartTodayMission(todayDay);
             }}
-            className="w-full sm:flex-1 py-4 px-6 rounded-xl font-cyber font-bold text-sm uppercase tracking-wider bg-gradient-to-r from-cyber-cyan via-cyber-green to-cyber-purple text-black shadow-glow-cyan hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2 group"
+            className="w-full sm:flex-1 py-4 px-6 rounded-xl font-cyber font-bold text-sm uppercase tracking-wider bg-cyber-cyan text-cyber-950 shadow-glow-cyan hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2 group"
           >
             <Zap className="w-5 h-5 text-black group-hover:scale-125 transition-transform" />
             <span>START TODAY'S MISSION</span>
@@ -261,7 +261,7 @@ export default function StoryIntro({ onEnterMissionControl, onStartTodayMission,
             {/* Launch Action */}
             <button
               onClick={handleCtaClick}
-              className="py-4 px-10 rounded-xl font-cyber font-bold text-sm uppercase tracking-wider bg-gradient-to-r from-cyber-cyan to-cyber-purple text-black shadow-glow-cyan hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
+              className="py-4 px-10 rounded-xl font-cyber font-bold text-sm uppercase tracking-wider bg-cyber-cyan text-cyber-950 shadow-glow-cyan hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
             >
               <span>ENTER MISSION CONTROL</span>
               <ArrowRight className="w-4 h-4 text-black" />

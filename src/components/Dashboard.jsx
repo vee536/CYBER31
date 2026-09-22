@@ -216,7 +216,7 @@ export default function Dashboard({
             <div className="flex flex-col sm:flex-row items-center gap-3 pt-3 border-t border-red-900/40">
               <button
                 onClick={() => onOpenMission(todayMission.day)}
-                className="w-full sm:flex-1 py-4 px-6 rounded-xl font-cyber font-bold text-xs sm:text-sm uppercase tracking-wider bg-gradient-to-r from-cyber-red via-orange-500 to-cyber-cyan text-white shadow-glow-red hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2.5"
+                className="w-full sm:flex-1 py-4 px-6 rounded-xl font-cyber font-bold text-xs sm:text-sm uppercase tracking-wider bg-cyber-red text-white shadow-glow-red hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2.5"
               >
                 <Zap className="w-4 h-4" />
                 <span>{isTodayCompleted ? 'REPLAY MISSION' : 'BEGIN MISSION'}</span>

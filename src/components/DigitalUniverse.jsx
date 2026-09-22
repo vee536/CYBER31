@@ -192,7 +192,7 @@ export default function DigitalUniverse({
       ctx.save();
       ctx.beginPath();
       ctx.arc(cx, cy, 180 * scale, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(198, 255, 77, 0.05)';
+      ctx.strokeStyle = 'rgba(163, 234, 42, 0.05)';
       ctx.lineWidth = 1;
       ctx.setLineDash([4, 8]);
       ctx.stroke();
@@ -224,7 +224,7 @@ export default function DigitalUniverse({
             } else if (n1.day === activeDay || n2.day === activeDay) {
               ctx.strokeStyle = 'rgba(255, 51, 102, 0.28)';
             } else {
-              ctx.strokeStyle = 'rgba(198, 255, 77, 0.12)';
+              ctx.strokeStyle = 'rgba(163, 234, 42, 0.12)';
             }
             ctx.stroke();
           }
@@ -246,8 +246,8 @@ export default function DigitalUniverse({
           const py = nFrom.y + (nTo.y - nFrom.y) * p.progress;
           ctx.beginPath();
           ctx.arc(px, py, 2.2 * scale, 0, Math.PI * 2);
-          ctx.fillStyle = '#c6ff4d';
-          ctx.shadowColor = '#c6ff4d';
+          ctx.fillStyle = '#a3ea2a';
+          ctx.shadowColor = '#a3ea2a';
           ctx.shadowBlur = 8;
           ctx.fill();
           ctx.shadowBlur = 0;
